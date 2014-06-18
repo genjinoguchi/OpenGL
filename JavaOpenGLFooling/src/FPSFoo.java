@@ -58,7 +58,7 @@ public class FPSFoo {
 			
 			Display.update();
 			
-			Display.sync(20);
+			Display.sync(60);
 			
 		}
 		
@@ -69,7 +69,7 @@ public class FPSFoo {
 	
 	public void update(int delta)
 	{
-		rotation += 0.15f + delta;
+		rotation -= 0.1f*delta;
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_A)){
 			x -= 0.35f * delta;
@@ -77,7 +77,6 @@ public class FPSFoo {
 		if(Keyboard.isKeyDown(Keyboard.KEY_D)){
 			x += 0.35f * delta;
 		}
-		
 		if(Keyboard.isKeyDown(Keyboard.KEY_S)){
 			y -= 0.35f * delta;
 		}
@@ -130,40 +129,52 @@ public class FPSFoo {
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
+		//glClearColor(1.0f,1.0f,0.0f,0.0f);
+		
 		glColor3f(1.0f,1.0f,0.0f);
 		
 		glPushMatrix();
 		
 		glTranslatef(x,y,0);
 		glRotatef(rotation,0f,0f,1f);
-		glTranslatef(-x,-y,0);
+		//glTranslatef(-x,-y,0);
 		
-		glBegin(GL_QUADS);
 		
+		
+		/*
+		glVertex2f(x,y);
 		glVertex2f(x-50,y-50);
+		
 		glVertex2f(x+50,y-50);
+		
 		glVertex2f(x+50,y+50);
 		glVertex2f(x-50,y+50);
 		
 		glEnd();
+		*/
+		
+		glBegin(GL_POLYGON);
 		
 		
+		float res = 10f;
+		float size = 100f;
+		double angle;
+		
+		
+		glBegin(GL_POLYGON);
+		for(int i=0;i<res;i++){
+			angle = i * 2*Math.PI / res;
+			glVertex2f(size*(float)Math.cos(angle),size*(float)Math.sin(angle));
+		}
+		/*
+		glVertex2f(x + size*(float)Math.cos(0),y + size*(float)Math.sin(0));
+		glVertex2f(x + size*(float)Math.cos(Math.PI/2),y + size*(float)Math.sin(Math.PI/2));
+		glVertex2f(x + size*(float)Math.cos(Math.PI),y + size*(float)Math.sin(Math.PI));
+		glVertex2f(x + size*(float)Math.cos(3*Math.PI/2),y + size*(float)Math.sin(Math.PI * 3 / 2));
+		*/
+		glEnd();
 		glPopMatrix();
 		
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

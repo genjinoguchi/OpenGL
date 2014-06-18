@@ -14,6 +14,7 @@ public class Driver {
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			
 		}
 		
 		System.out.println("Lol what happened why did it work");
@@ -51,7 +52,6 @@ public class Driver {
 				
 				
 			}
-			
 			glEnd();
 			
 			Display.update();
